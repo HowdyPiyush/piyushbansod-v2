@@ -28,10 +28,11 @@ const iconClass = isHome
         NAVIGATION.map((item) => {
           const exact = item.to === "/";
           const active = exact ? current === "/" : current.startsWith(item.to);
+          const linkClass = "text-sm " + (active ? activeClass : inactiveClass);
           return (
-            <a
-              href={item.to}
-              class={`text-sm ${active ? activeClass : inactiveClass}`}
+            
+            <a  href={item.to}
+              class={linkClass}
               aria-current={active ? "page" : undefined}
             >
               {item.label}
@@ -52,13 +53,6 @@ const iconClass = isHome
       >
         <Icon name="search" class="h-4 w-4" />
       </button>
-      <a
-        href="/rss.xml"
-        aria-label="RSS feed"
-        class={`${iconClass} hidden sm:inline-flex`}
-      >
-        <Icon name="rss" class="h-4 w-4" />
-      </a>
       <button
         type="button"
         data-theme-toggle
@@ -74,7 +68,7 @@ const iconClass = isHome
         aria-label="Menu"
         aria-controls="mobile-menu"
         aria-expanded="false"
-        class={`${iconClass} md:hidden`}
+        class={iconClass + " md:hidden"}
       >
         <span data-menu-icon="menu"><Icon name="menu" class="h-4 w-4" /></span>
         <span data-menu-icon="x" hidden><Icon name="x" class="h-4 w-4" /></span>
@@ -87,8 +81,8 @@ const iconClass = isHome
       <input
         data-search-input
         name="q"
-        aria-label="Search essays, field notes, interviews"
-        placeholder="Search essays, field notes, interviews..."
+        aria-label="Search posts"
+        placeholder="Search posts..."
         class="w-full border-0 bg-transparent py-2 font-serif text-lg outline-none placeholder:text-muted-foreground"
       />
     </form>
@@ -100,10 +94,11 @@ const iconClass = isHome
         NAVIGATION.map((item) => {
           const exact = item.to === "/";
           const active = exact ? current === "/" : current.startsWith(item.to);
+          const linkClass = "rounded-md px-2 py-2 text-sm hover:bg-muted hover:text-foreground " + (active ? "text-foreground" : "text-muted-foreground");
           return (
-            <a
-              href={item.to}
-              class={`rounded-md px-2 py-2 text-sm hover:bg-muted hover:text-foreground ${active ? "text-foreground" : "text-muted-foreground"}`}
+            
+            <a  href={item.to}
+              class={linkClass}
               aria-current={active ? "page" : undefined}
             >
               {item.label}
@@ -172,12 +167,10 @@ const iconClass = isHome
 
   document.addEventListener("keydown", (event) => {
     if (event.key !== "Escape") return;
-
     if (!searchPanel.hidden) {
       setSearch(false);
       searchToggle?.focus();
     }
-
     if (!menuPanel.hidden) {
       setMenu(false);
       menuToggle?.focus();

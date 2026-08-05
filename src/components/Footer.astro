@@ -1,6 +1,6 @@
 ---
 import Icon from "./Icon.astro";
-import { SITE, categories } from "../lib/blog-data.js";
+import { SITE } from "../lib/blog-data.js";
 import { SOCIAL_LINKS } from "../config/theme.config.ts";
 
 const { flush = false } = Astro.props;
@@ -16,7 +16,7 @@ const { flush = false } = Astro.props;
       <div class="mt-4 flex items-center gap-3 text-muted-foreground">
         {
           SOCIAL_LINKS.map((link) => (
-            <a href={link.href} aria-label={link.label} class="hover:text-foreground">
+            <a href={link.href} aria-label={link.label} target="_blank" rel="noreferrer" class="hover:text-foreground">
               <Icon name={link.icon} class="h-4 w-4" />
             </a>
           ))
@@ -24,33 +24,32 @@ const { flush = false } = Astro.props;
       </div>
     </div>
     <div>
-      <div class="text-xs font-medium uppercase tracking-wider text-muted-foreground">Sections</div>
+      <div class="text-xs font-medium uppercase tracking-wider text-muted-foreground">Explore</div>
       <ul class="mt-3 space-y-2 text-sm">
-        {
-          categories.slice(0, 5).map((category) => (
-            <li>
-              <a href={`/categories/${category.slug}`} class="text-foreground/80 hover:text-foreground">
-                {category.name}
-              </a>
-            </li>
-          ))
-        }
+        <li><a href="/blog" class="text-foreground/80 hover:text-foreground">Blog</a></li>
+        <li><a href="/projects" class="text-foreground/80 hover:text-foreground">Work</a></li>
+        <li><a href="/services" class="text-foreground/80 hover:text-foreground">Services</a></li>
+        <li><a href="/about" class="text-foreground/80 hover:text-foreground">About</a></li>
+        <li><a href="/contact" class="text-foreground/80 hover:text-foreground">Contact</a></li>
       </ul>
     </div>
     <div>
-      <div class="text-xs font-medium uppercase tracking-wider text-muted-foreground">The site</div>
+      <div class="text-xs font-medium uppercase tracking-wider text-muted-foreground">Topics</div>
       <ul class="mt-3 space-y-2 text-sm">
-        <li><a href="/about" class="hover:text-foreground">About</a></li>
-        <li><a href="/contact" class="hover:text-foreground">Contact</a></li>
-        <li><a href="/blog" class="hover:text-foreground">Archive</a></li>
-        <li><a href="/rss.xml" class="hover:text-foreground">RSS feed</a></li>
+        <li><a href="/categories/seo" class="text-foreground/80 hover:text-foreground">SEO</a></li>
+        <li><a href="/categories/aeo" class="text-foreground/80 hover:text-foreground">AEO</a></li>
+        <li><a href="/categories/ai" class="text-foreground/80 hover:text-foreground">AI</a></li>
+        <li><a href="/categories/marketing" class="text-foreground/80 hover:text-foreground">Marketing</a></li>
+        <li><a href="/categories/tools" class="text-foreground/80 hover:text-foreground">Tools</a></li>
       </ul>
     </div>
   </div>
   <div class="border-t border-border/60">
     <div class="mx-auto flex max-w-6xl flex-col items-start justify-between gap-2 px-5 py-5 text-xs text-muted-foreground sm:flex-row sm:items-center">
-      <div>&copy; {new Date().getFullYear()} {SITE.name}. Quietly made on the open web.</div>
-      <div>Set in Fraunces &amp; Inter.</div>
+      <div>&copy; {new Date().getFullYear()} {SITE.name}. All rights reserved.</div>
+      <div>
+        <a href="mailto:howdypiyush@gmail.com" class="hover:text-foreground">howdypiyush@gmail.com</a>
+      </div>
     </div>
   </div>
 </footer>

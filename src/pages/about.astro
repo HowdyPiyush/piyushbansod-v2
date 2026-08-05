@@ -6,7 +6,7 @@ import { SITE, authors } from "../lib/blog-data.js";
 
 <BaseLayout
   title={`About - ${SITE.name}`}
-  description={`About ${SITE.name}: an independent magazine on writing, design, and the slow web.`}
+  description="Full-stack digital marketer & AI generalist with 6+ years of experience in SEO, AEO, and AI-powered marketing."
   canonical="/about"
 >
   <div class="mx-auto max-w-3xl px-5 py-12">
@@ -15,40 +15,129 @@ import { SITE, authors } from "../lib/blog-data.js";
     <header class="mt-6">
       <div class="text-xs font-medium uppercase tracking-[0.2em] text-primary">About</div>
       <h1 class="mt-2 font-serif text-5xl font-semibold leading-[1.05]">
-        A quiet magazine for the open web.
+        Hey, I'm Piyush 👋
       </h1>
     </header>
 
     <div class="prose-article mt-10">
       <p>
-        {SITE.name} began as a folder of notes, drafts, and half-finished essays &mdash; the kind of writing that doesn't survive the timeline. We started publishing it here because we wanted somewhere slower to read, and somewhere slower to write.
+        I'm a full-stack digital marketer and AI generalist who likes to learn, write, and build things on the side. This is my space to share what I'm exploring — sometimes it's marketing, sometimes it's just things I'm genuinely curious about.
       </p>
       <p>
-        The magazine is independent, occasional, and unsponsored. We publish when the work is ready and not before. There are no trackers, no pop-ups, and no infinite scroll. Just sentences, photographs, and the occasional conversation.
+        I work with SMB & B2B businesses — mainly helping with SEO, Answer Engine Optimisation (AEO), and now diving deep into AI agents and how they're changing the way marketing works. I care about strategies that compound over time, not quick wins that disappear.
       </p>
-      <h2 id="what-we-publish">What we publish</h2>
-      <p>
-        Essays on writing, design, and the craft of the web. Field notes from places we love. Interviews with people who make things with their hands. The occasional photograph, when one is worth printing.
-      </p>
-      <h2 id="who-we-are">Who we are</h2>
-      <p>A small editorial team, scattered across three time zones, who would rather be reading.</p>
     </div>
 
+    <section class="mt-12 space-y-12">
+
+      <div>
+        <div class="text-xs font-medium uppercase tracking-[0.2em] text-primary mb-6">Experience</div>
+
+        <div class="space-y-10">
+          <div class="border-t border-border pt-6">
+            <div class="flex items-start justify-between gap-4">
+              <h3 class="font-serif text-xl font-semibold">Founder — Clysentra</h3>
+              <span class="text-sm text-muted-foreground whitespace-nowrap">2024 – Present</span>
+            </div>
+            <div class="text-sm text-muted-foreground mt-1">Pune, Maharashtra, India</div>
+            <p class="mt-3 text-muted-foreground leading-relaxed">
+              Building a digital marketing agency focused on SEO, AEO, and AI-powered growth for SMB and B2B businesses. Overseeing strategy, client acquisition, and service delivery.
+            </p>
+          </div>
+
+          <div class="border-t border-border pt-6">
+            <div class="flex items-start justify-between gap-4">
+              <h3 class="font-serif text-xl font-semibold">Freelance SEO Specialist</h3>
+              <span class="text-sm text-muted-foreground whitespace-nowrap">Nov 2019 – Present</span>
+            </div>
+            <div class="text-sm text-muted-foreground mt-1">Remote</div>
+            <p class="mt-3 text-muted-foreground leading-relaxed">
+              Helping businesses boost search visibility, attract the right audience, and drive conversions through strategic on-page and technical SEO.
+            </p>
+            <ul class="mt-3 space-y-1 text-sm text-muted-foreground">
+              <li>— Executed 350+ on-page SEO campaigns for enterprise clients, B2B SaaS companies, and local businesses</li>
+              <li>— Identified high-intent keywords and optimised content for better rankings across competitive niches</li>
+              <li>— Delivered actionable SEO audits and competitive analysis reports</li>
+              <li>— Enhanced metadata, internal linking, and page structure for better engagement</li>
+              <li>— Helped clients rank for the right keywords, driving qualified traffic and conversions</li>
+            </ul>
+          </div>
+
+          <div class="border-t border-border pt-6">
+            <div class="flex items-start justify-between gap-4">
+              <h3 class="font-serif text-xl font-semibold">Senior Sales Executive — Home Credit India</h3>
+              <span class="text-sm text-muted-foreground whitespace-nowrap">Aug 2016 – Oct 2017</span>
+            </div>
+            <div class="text-sm text-muted-foreground mt-1">Nagpur, Maharashtra, India</div>
+            <ul class="mt-3 space-y-1 text-sm text-muted-foreground">
+              <li>— Generated sales leads and cold-called potential customers to drive company growth</li>
+              <li>— Consistently met or exceeded sales objectives on a monthly basis</li>
+              <li>— Resolved customer complaints professionally while prioritising satisfaction</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div class="text-xs font-medium uppercase tracking-[0.2em] text-primary mb-6">Skills</div>
+        <div class="border-t border-border pt-6">
+          <div class="flex flex-wrap gap-2">
+            {[
+              "SEO Strategy", "Technical SEO", "On-Page SEO", "SEO Audits",
+              "Keyword Research", "Topical Maps", "Content Strategy", "AEO",
+              "Schema Markup", "Internal Linking", "Google Analytics",
+              "Google Search Console", "AI Tools & Automation", "AI Agents",
+              "Prompt Engineering", "B2B Marketing", "Lead Generation",
+              "Competitive Analysis"
+            ].map(skill => (
+              <span class="rounded-full border border-border px-3 py-1 text-sm text-muted-foreground">
+                {skill}
+              </span>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div class="text-xs font-medium uppercase tracking-[0.2em] text-primary mb-6">Books I Keep Coming Back To</div>
+        <div class="border-t border-border pt-6 space-y-3">
+          {[
+            { title: "Atomic Habits", author: "James Clear" },
+            { title: "The Bullet Journal Method", author: "Ryder Carroll" },
+            { title: "Building a Second Brain", author: "Tiago Forte" },
+            { title: "Getting Things Done", author: "David Allen" },
+            { title: "Obviously Awesome", author: "April Dunford" },
+          ].map(book => (
+            <div class="flex items-baseline gap-2">
+              <span class="font-serif font-semibold">{book.title}</span>
+              <span class="text-sm text-muted-foreground">— {book.author}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+
+    </section>
+
     <section class="mt-12 border-t border-border pt-10">
-      <h2 class="font-serif text-2xl font-semibold">Contributors</h2>
-      <div class="mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-        {
-          authors.map((author) => (
-            <a href={`/authors/${author.slug}`} class="group flex items-start gap-3">
-              <img src={author.avatar} alt="" width="48" height="48" class="h-12 w-12 rounded-full" />
-              <div>
-                <div class="font-serif text-base font-semibold group-hover:text-primary">{author.name}</div>
-                <div class="mt-1 text-sm text-muted-foreground">{author.bio}</div>
-              </div>
-            </a>
-          ))
-        }
+      <h2 class="font-serif text-2xl font-semibold">The Author</h2>
+      <div class="mt-6">
+        {authors.map((author) => (
+          <a href={`/authors/${author.slug}`} class="group flex items-start gap-4">
+            <img
+              src={author.avatar}
+              alt={author.name}
+              width="64"
+              height="64"
+              class="h-16 w-16 rounded-full object-cover"
+            />
+            <div>
+              <div class="font-serif text-lg font-semibold group-hover:text-primary">{author.name}</div>
+              <div class="mt-1 text-sm text-muted-foreground">{author.longBio}</div>
+            </div>
+          </a>
+        ))}
       </div>
     </section>
+
   </div>
 </BaseLayout>

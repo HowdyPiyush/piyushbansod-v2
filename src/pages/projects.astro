@@ -1,0 +1,135 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Breadcrumbs from "../components/Breadcrumbs.astro";
+import { SITE } from "../lib/blog-data.js";
+
+const caseStudies = [
+  {
+    title: "Scaling an Enterprise B2B Manufacturer to 2.89M Impressions",
+    client: "Anonymous (NDA Signed)",
+    industry: "Manufacturing & Custom Industrial Solutions",
+    duration: "2022 – Ongoing",
+    badge: "B2B SEO",
+    description: "Built a long-term SEO roadmap for an enterprise B2B manufacturer — topical maps, technical fixes, and content clusters targeting national and international markets.",
+    results: [
+      "2.89M impressions in 12 months",
+      "28.7K clicks",
+      "Average position improved to 13",
+      "40K active users, 56K sessions",
+    ],
+    tags: ["B2B SEO", "Technical SEO", "Content Strategy", "Topical Maps"],
+    slug: "enterprise-b2b-manufacturer",
+  },
+  {
+    title: "162K Impressions for a Canadian Shopify B2B Brand",
+    client: "DTF Canada",
+    industry: "B2B Printing Equipment & Supplies",
+    duration: "Multi-phase project",
+    badge: "Shopify SEO",
+    description: "Helped DTF Canada grow organic visibility through keyword mapping, on-page optimisation, and technical improvements — all within Shopify's constraints.",
+    results: [
+      "162K impressions in 12 months",
+      "2.79K clicks",
+      "Steady organic leads",
+      "Reduced ad dependency",
+    ],
+    tags: ["Shopify SEO", "B2B SEO", "Technical SEO", "Lead Generation"],
+    slug: "dtf-canada",
+  },
+  {
+    title: "Revamping a UK B2B Ecommerce Site from Over-Optimisation",
+    client: "Only Optical",
+    industry: "B2B Eyewear Ecommerce",
+    duration: "June 2025 – Ongoing",
+    badge: "Technical SEO",
+    description: "Rebuilt Only Optical's SEO from the ground up — fixing keyword stuffing, URL structure, and technical issues to restore and grow organic traffic.",
+    results: [
+      "Clicks: 635 → 935",
+      "Impressions: 43.4K → 180K",
+      "Avg position: 28.1 → 24",
+      "Earned trust for 2 additional stores",
+    ],
+    tags: ["Technical SEO", "B2B SEO", "Ecommerce SEO"],
+    slug: "only-optical",
+  },
+  {
+    title: "Large-Scale Redesign Without Traffic Loss: Magic Ibiza",
+    client: "Magic Ibiza",
+    industry: "Travel Affiliate Blog",
+    duration: "April – June 2025",
+    badge: "Migration SEO",
+    description: "Managed SEO for a 650+ page travel site redesign — protecting rankings while improving UX, navigation, and content structure.",
+    results: [
+      "Clicks: 486 → 923",
+      "Impressions: 38K → 77K",
+      "Avg position: 14.7 → 12.1",
+      "40%+ improvement from baseline",
+    ],
+    tags: ["Migration SEO", "Technical SEO", "Travel"],
+    slug: "magic-ibiza",
+  },
+];
+---
+
+<BaseLayout
+  title={`Work - ${SITE.name}`}
+  description="Real SEO and digital marketing projects with real results. Case studies from B2B, Shopify, ecommerce, and travel."
+  canonical="/projects"
+>
+  <div class="mx-auto max-w-3xl px-5 py-12">
+    <Breadcrumbs items={[{ label: "Home", to: "/" }, { label: "Work" }]} />
+
+    <header class="mt-6">
+      <div class="text-xs font-medium uppercase tracking-[0.2em] text-primary">Work</div>
+      <h1 class="mt-2 font-serif text-5xl font-semibold leading-[1.05]">
+        Work that speaks for itself.
+      </h1>
+      <p class="mt-4 max-w-xl text-muted-foreground">
+        A selection of SEO and digital marketing projects — with real numbers attached.
+      </p>
+    </header>
+
+    <div class="mt-12 space-y-12">
+      {caseStudies.map((study) => (
+        <div class="border-t border-border pt-8">
+          <div class="flex items-start justify-between gap-4 flex-wrap">
+            <div class="text-xs font-medium uppercase tracking-[0.2em] text-primary">{study.badge}</div>
+            <span class="text-sm text-muted-foreground">{study.duration}</span>
+          </div>
+          <h2 class="mt-2 font-serif text-2xl font-semibold leading-snug">{study.title}</h2>
+          <div class="mt-1 text-sm text-muted-foreground">
+            {study.client} · {study.industry}
+          </div>
+          <p class="mt-4 text-muted-foreground leading-relaxed">{study.description}</p>
+          <div class="mt-4 grid grid-cols-2 gap-2 sm:grid-cols-4">
+            {study.results.map((result) => (
+              <div class="rounded-lg border border-border p-3">
+                <div class="text-sm font-medium">{result}</div>
+              </div>
+            ))}
+          </div>
+          <div class="mt-4 flex flex-wrap gap-2">
+            {study.tags.map((tag) => (
+              <span class="rounded-full border border-border px-3 py-1 text-xs text-muted-foreground">
+                {tag}
+              </span>
+            ))}
+          </div>
+        </div>
+      ))}
+    </div>
+
+    <div class="mt-16 border-t border-border pt-10">
+      <h2 class="font-serif text-2xl font-semibold">Want results like these?</h2>
+      <p class="mt-3 text-muted-foreground">
+        I work with a small number of clients at a time. If you're looking for SEO, AEO, or AI-powered marketing — let's talk.
+      </p>
+      <div class="mt-8">
+  <a href="mailto:howdypiyush@gmail.com" class="inline-block rounded-md bg-foreground px-6 py-2.5 text-sm font-medium text-background hover:opacity-90">
+    Let's talk
+  </a>
+</div>
+    </div>
+
+  </div>
+</BaseLayout>

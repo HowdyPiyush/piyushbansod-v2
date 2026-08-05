@@ -1,30 +1,32 @@
 const siteUrl = (
   import.meta.env.SITE_URL ||
   import.meta.env.PUBLIC_SITE_URL ||
-  "https://quietpages-eta.vercel.app"
+  "https://piyushbansod.com"
 ).replace(/\/$/, "");
 
 export const SITE = {
-  name: "Quiet Pages",
+  name: "Piyush Bansod",
   description:
-    "An independent magazine on writing, design, and the slow web. Published occasionally, read closely.",
+    "Full-stack digital marketer & AI generalist. Writing about SEO, AEO, AI, and things I'm genuinely curious about.",
   url: siteUrl,
-  locale: "en-US",
+  locale: "en-IN",
   language: "en",
-  repositoryUrl: "https://github.com/andreialba/quietpages",
+  repositoryUrl: "https://github.com/HowdyPiyush/piyushbansod-website",
 };
 
 export const NAVIGATION = [
   { to: "/", label: "Home" },
-  { to: "/blog", label: "Writing" },
+  { to: "/blog", label: "Blog" },
+  { to: "/projects", label: "Work" },
+  { to: "/services", label: "Services" },
   { to: "/about", label: "About" },
   { to: "/contact", label: "Contact" },
 ];
 
 export const CONTACT = {
-  email: "hello@example.com",
-  socialHandle: "@quietpages",
-  socialUrl: "https://x.com/quietpages",
+  email: "howdypiyush@gmail.com",
+  socialHandle: "@howdypiyush_",
+  socialUrl: "https://x.com/howdypiyush_",
 };
 
 export const FORMS = {
@@ -41,54 +43,41 @@ export const FORMS = {
 };
 
 export const SOCIAL_LINKS = [
-  { href: "/rss.xml", label: "RSS feed", icon: "rss" },
-  { href: CONTACT.socialUrl, label: `${SITE.name} on X`, icon: "twitter" },
-  { href: SITE.repositoryUrl, label: `${SITE.name} on GitHub`, icon: "github" },
-  { href: `mailto:${CONTACT.email}`, label: "Email", icon: "mail" },
+  { href: "https://www.linkedin.com/in/howdypiyush/", label: "LinkedIn", icon: "linkedin" },
+  { href: "https://instagram.com/howdypiyush/", label: "Instagram", icon: "instagram" },
+  { href: "https://x.com/howdypiyush_", label: "X / Twitter", icon: "twitter" },
+  { href: "mailto:howdypiyush@gmail.com", label: "Email", icon: "mail" },
 ];
 
 export const authors = [
   {
-    slug: "elena-march",
-    name: "Elena March",
-    bio: "Writer & editor covering design, craft, and slow technology.",
+    slug: "piyush-bansod",
+    name: "Piyush Bansod",
+    bio: "Full-stack digital marketer & AI generalist helping SMB & B2B businesses grow.",
     longBio:
-      "Elena March writes about the quiet edges of design and technology. Previously an editor at two small magazines, she now publishes essays and field notes from a desk overlooking the harbour.",
-    avatar: "/avatars/elena-march.svg",
-  },
-  {
-    slug: "samuel-okafor",
-    name: "Samuel Okafor",
-    bio: "Software engineer with a soft spot for typography and the open web.",
-    longBio:
-      "Samuel builds tools for writers and reads more than he ships. He believes the best interfaces are the ones you don't notice.",
-    avatar: "/avatars/samuel-okafor.svg",
-  },
-  {
-    slug: "mira-iwasaki",
-    name: "Mira Iwasaki",
-    bio: "Photographer and essayist based between Kyoto and Lisbon.",
-    longBio:
-      "Mira's work sits at the intersection of place, memory, and the everyday object. Her essays have appeared in a number of small but loved publications.",
-    avatar: "/avatars/mira-iwasaki.svg",
+      "I'm a full-stack digital marketer and AI generalist with 6+ years of experience helping SMB and B2B businesses grow through SEO, AEO, and AI-powered marketing strategies. I've executed 350+ on-page SEO campaigns and I'm now building Clysentra, my own digital marketing agency. This is my space to share what I'm exploring — sometimes it's marketing, sometimes it's just things I'm genuinely curious about.",
+    avatar: "/profile.webp",
   },
 ];
 
 export const categories = [
-  { slug: "essays", name: "Essays" },
-  { slug: "design", name: "Design" },
-  { slug: "engineering", name: "Engineering" },
-  { slug: "field-notes", name: "Field Notes" },
-  { slug: "interviews", name: "Interviews" },
+  { slug: "seo", name: "SEO" },
+  { slug: "aeo", name: "AEO" },
+  { slug: "ai", name: "AI" },
+  { slug: "marketing", name: "Marketing" },
+  { slug: "tools", name: "Tools" },
+  { slug: "personal", name: "Personal" },
 ];
 
 export const tags = [
-  { slug: "writing", name: "Writing" },
-  { slug: "typography", name: "Typography" },
-  { slug: "minimalism", name: "Minimalism" },
+  { slug: "seo", name: "SEO" },
+  { slug: "aeo", name: "AEO" },
+  { slug: "ai", name: "AI" },
+  { slug: "custom-gpts", name: "Custom GPTs" },
+  { slug: "marketing", name: "Marketing" },
+  { slug: "schema", name: "Schema" },
+  { slug: "b2b", name: "B2B" },
+  { slug: "shopify", name: "Shopify" },
   { slug: "tools", name: "Tools" },
-  { slug: "travel", name: "Travel" },
-  { slug: "process", name: "Process" },
-  { slug: "web", name: "Web" },
-  { slug: "books", name: "Books" },
+  { slug: "productivity", name: "Productivity" },
 ];

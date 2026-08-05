@@ -1,0 +1,98 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Breadcrumbs from "../components/Breadcrumbs.astro";
+import { SITE } from "../lib/blog-data.js";
+---
+
+<BaseLayout
+  title={`Services - ${SITE.name}`}
+  description="SEO, AEO, Technical SEO, and AI-powered marketing services for SMB and B2B businesses."
+  canonical="/services"
+>
+  <div class="mx-auto max-w-3xl px-5 py-12">
+    <Breadcrumbs items={[{ label: "Home", to: "/" }, { label: "Services" }]} />
+
+    <header class="mt-6">
+      <div class="text-xs font-medium uppercase tracking-[0.2em] text-primary">Services</div>
+      <h1 class="mt-2 font-serif text-5xl font-semibold leading-[1.05]">
+        How I can help.
+      </h1>
+      <p class="mt-4 max-w-xl text-muted-foreground">
+        I work with a small number of SMB & B2B clients at a time — so every engagement gets real attention, not a templated approach.
+      </p>
+    </header>
+
+    <div class="mt-12 divide-y divide-border">
+
+      <div class="py-10">
+        <div class="text-xs font-medium uppercase tracking-[0.2em] text-primary">Most Popular</div>
+        <h2 class="mt-2 font-serif text-2xl font-semibold">SEO Strategy & Execution</h2>
+        <p class="mt-4 text-muted-foreground leading-relaxed">
+          Full-stack SEO for SMB and B2B businesses — keyword research, topical maps, on-page optimisation, technical audits, and content structuring. Built for long-term compounding results, not short-term spikes.
+        </p>
+        <ul class="mt-4 space-y-2 text-sm text-muted-foreground">
+          <li>— Keyword research & topical mapping</li>
+          <li>— On-page optimisation</li>
+          <li>— Technical SEO audits</li>
+          <li>— Content strategy & structuring</li>
+          <li>— Google Analytics & Search Console setup</li>
+        </ul>
+      </div>
+
+      <div class="py-10">
+        <div class="text-xs font-medium uppercase tracking-[0.2em] text-primary">New</div>
+        <h2 class="mt-2 font-serif text-2xl font-semibold">Answer Engine Optimisation (AEO)</h2>
+        <p class="mt-4 text-muted-foreground leading-relaxed">
+          Optimise your content to appear in AI-generated answers, featured snippets, and knowledge panels. As search shifts toward AI Overviews and generative results, AEO is the next frontier — and most businesses aren't there yet.
+        </p>
+        <ul class="mt-4 space-y-2 text-sm text-muted-foreground">
+          <li>— Schema markup & structured data</li>
+          <li>— Featured snippet optimisation</li>
+          <li>— AI Overview visibility</li>
+          <li>— Entity-based SEO</li>
+        </ul>
+      </div>
+
+      <div class="py-10">
+        <h2 class="mt-2 font-serif text-2xl font-semibold">Technical SEO Audit</h2>
+        <p class="mt-4 text-muted-foreground leading-relaxed">
+          A deep-dive audit of your website's technical health — crawlability, indexation, Core Web Vitals, schema markup, site architecture, and more. You get a clear, prioritised action plan, not a 100-page report no one reads.
+        </p>
+        <ul class="mt-4 space-y-2 text-sm text-muted-foreground">
+          <li>— Full crawl & indexation audit</li>
+          <li>— Core Web Vitals analysis</li>
+          <li>— Schema & structured data review</li>
+          <li>— Prioritised action plan</li>
+        </ul>
+      </div>
+
+      <div class="py-10">
+        <div class="text-xs font-medium uppercase tracking-[0.2em] text-primary">New</div>
+        <h2 class="mt-2 font-serif text-2xl font-semibold">AI-Powered Marketing Strategy</h2>
+        <p class="mt-4 text-muted-foreground leading-relaxed">
+          Integrate AI tools and agents into your marketing workflows to move faster, create smarter content, and automate repetitive tasks. From prompt engineering to building custom GPTs — practical AI, not hype.
+        </p>
+        <ul class="mt-4 space-y-2 text-sm text-muted-foreground">
+          <li>— AI workflow integration</li>
+          <li>— Custom GPT development</li>
+          <li>— Prompt engineering</li>
+          <li>— AI content strategy</li>
+        </ul>
+      </div>
+
+    </div>
+
+    <div class="mt-16 border-t border-border pt-10">
+      <h2 class="font-serif text-2xl font-semibold">Not sure which service fits?</h2>
+      <p class="mt-3 text-muted-foreground">
+        Tell me about your business and what you're trying to achieve — I'll let you know if and how I can help.
+      </p>
+      <div class="mt-6">
+        <a href="mailto:howdypiyush@gmail.com" class="inline-block rounded-md bg-foreground px-6 py-2.5 text-sm font-medium text-background hover:opacity-90">
+          Let's talk
+        </a>
+      </div>
+    </div>
+
+  </div>
+</BaseLayout>

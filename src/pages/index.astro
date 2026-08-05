@@ -1,10 +1,8 @@
 ---
-import { Image } from "astro:assets";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import PostCard from "../components/PostCard.astro";
 import Newsletter from "../components/Newsletter.astro";
 import Icon from "../components/Icon.astro";
-import autumnScene from "../assets/autumn-scene.webp";
 import {
   SITE,
   categories,
@@ -14,6 +12,7 @@ import {
   getCategory,
   formatDate,
 } from "../lib/blog-data.js";
+import { Image } from "astro:assets";
 
 const featured = await featuredPost();
 const featuredAuthor = getAuthor(featured.author);
@@ -22,58 +21,45 @@ const latest = (await sortedPosts()).filter((post) => post.slug !== featured.slu
 ---
 
 <BaseLayout
-  title={`${SITE.name} - Writing, design & the slow web`}
+  title={`${SITE.name} — Full-stack digital marketer & AI generalist`}
   description={SITE.description}
   canonical="/"
   flushFooter
 >
   <section class="relative -mt-[calc(4rem+2px)] min-h-[calc(100svh-2rem)] overflow-hidden border-b border-border/60 pt-[calc(4rem+2px)] sm:min-h-[760px]">
-    <Image
-      src={autumnScene}
-      alt=""
-      class="absolute inset-0 h-full w-full object-cover object-center"
-      loading="eager"
-      fetchpriority="high"
-      decoding="async"
-      width={1600}
-      widths={[640, 960, 1280, 1600]}
-      sizes="100vw"
-      format="webp"
-      quality={50}
-    />
+    <div class="absolute inset-0 bg-[#0a0a0a]"></div>
     <div
       aria-hidden="true"
-      class="absolute inset-0 bg-[linear-gradient(90deg,oklch(0.1_0.02_70_/_0.68),oklch(0.16_0.02_80_/_0.38)_46%,oklch(0.98_0.01_90_/_0.1))] dark:bg-[linear-gradient(90deg,oklch(0.08_0.01_70_/_0.78),oklch(0.08_0.01_70_/_0.52)_48%,oklch(0.08_0.01_70_/_0.18))]"
-    />
-    <div
-      aria-hidden="true"
-      class="absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-black/45 via-black/18 to-transparent"
-    />
+      class="absolute inset-0 bg-[radial-gradient(ellipse_at_top_left,oklch(0.35_0.12_150_/_0.25),transparent_60%)]"
+    ></div>
     <div
       aria-hidden="true"
       class="absolute inset-x-0 bottom-0 h-48 bg-gradient-to-t from-background via-background/72 to-transparent"
-    />
+    ></div>
     <div class="relative mx-auto flex min-h-[calc(100svh-6rem)] max-w-6xl items-center px-5 py-20 sm:min-h-[680px] sm:py-24">
       <div class="max-w-4xl text-white drop-shadow-[0_1px_18px_rgba(0,0,0,0.28)]">
+        <div class="mb-6 text-xs font-medium uppercase tracking-[0.2em] text-primary">
+          Full-stack digital marketer & AI generalist
+        </div>
         <h1 class="font-serif text-[2.5rem] font-medium leading-[1.02] sm:text-6xl lg:text-7xl">
-        An independent magazine on
-          <span class="italic text-white"> writing</span>,
-          <span class="italic text-white"> design</span>, and the
-          <span class="italic text-white"> slow web</span>.
+          Marketing meets
+          <span class="italic"> AI.</span>
+          Strategy meets
+          <span class="italic"> execution.</span>
         </h1>
         <p class="mt-8 max-w-xl text-lg leading-relaxed text-white/86">
-          Essays, field notes, and conversations &mdash; published occasionally, edited carefully, and meant to be read in a single sitting.
+          I'm Piyush — I work with SMB & B2B businesses on SEO, AEO, and AI-powered growth strategies. This is my space to share what I'm exploring.
         </p>
         <div class="mt-10 flex flex-wrap items-center gap-x-8 gap-y-4">
-          <a
-            href={`/blog/${featured.slug}`}
+          
+          <a  href="/projects"
             class="group inline-flex items-center gap-2 border-b border-white pb-1 text-sm font-medium text-white hover:border-white/70 hover:text-white/82"
           >
-            Begin with this issue's lead essay
+            See my work
             <Icon name="arrow-right" class="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
           </a>
           <a href="/blog" class="text-sm text-white/76 hover:text-white">
-            Or browse the archive
+            Or read the blog
           </a>
         </div>
       </div>
@@ -84,36 +70,32 @@ const latest = (await sortedPosts()).filter((post) => post.slug !== featured.slu
     <div class="mx-auto max-w-6xl px-5 py-16">
       <div class="mb-6 flex items-center justify-between">
         <div class="text-xs font-medium uppercase tracking-wider text-muted-foreground">Featured</div>
-        <a href="/blog" class="text-xs text-muted-foreground hover:text-foreground">All writing &rarr;</a>
+        <a href="/blog" class="text-xs text-muted-foreground hover:text-foreground">All posts &rarr;</a>
       </div>
       <article class="grid gap-10 lg:grid-cols-2">
         <a href={`/blog/${featured.slug}`} class="group block" aria-label={`Read ${featured.title}`}>
           <div class="aspect-[4/3] overflow-hidden rounded-md bg-muted">
-            {
-              featured.thumbnail && (
-                <Image
-                  src={featured.thumbnail}
-                  alt=""
-                  class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.02]"
-                  width={720}
-                  widths={[372, 560, 720]}
-                  sizes="(min-width: 1024px) 560px, calc(100vw - 40px)"
-                  format="webp"
-                  quality={64}
-                />
-              )
-            }
+            {featured.thumbnail && (
+              <Image
+                src={featured.thumbnail}
+                alt=""
+                class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.02]"
+                width={720}
+                widths={[372, 560, 720]}
+                sizes="(min-width: 1024px) 560px, calc(100vw - 40px)"
+                format="webp"
+                quality={64}
+              />
+            )}
           </div>
         </a>
         <div class="flex flex-col justify-center">
           <div class="flex items-center gap-3 text-xs uppercase tracking-wider text-muted-foreground">
-            {
-              featuredCategory && (
-                <a href={`/categories/${featuredCategory.slug}`} class="inline-flex min-h-9 items-center text-primary hover:underline">
-                  {featuredCategory.name}
-                </a>
-              )
-            }
+            {featuredCategory && (
+              <a href={`/categories/${featuredCategory.slug}`} class="inline-flex min-h-9 items-center text-primary hover:underline">
+                {featuredCategory.name}
+              </a>
+            )}
             <span>&middot;</span>
             <time datetime={featured.date}>{formatDate(featured.date)}</time>
           </div>
@@ -124,25 +106,24 @@ const latest = (await sortedPosts()).filter((post) => post.slug !== featured.slu
           </a>
           <p class="mt-4 text-lg text-muted-foreground">{featured.excerpt}</p>
           <div class="mt-6 flex items-center gap-3 text-sm text-muted-foreground">
-            {
-              featuredAuthor && (
-                <>
-                  <img
-                    src={featuredAuthor.avatar}
-                    alt=""
-                    width="28"
-                    height="28"
-                    class="h-7 w-7 rounded-full"
-                  />
-                  <a href={`/authors/${featuredAuthor.slug}`} class="hover:text-foreground">{featuredAuthor.name}</a>
-                  <span>&middot;</span>
-                </>
-              )
-            }
+            {featuredAuthor && (
+              <>
+                <img
+                  src={featuredAuthor.avatar}
+                  alt=""
+                  width="28"
+                  height="28"
+                  class="h-7 w-7 rounded-full object-cover"
+                />
+                <a href={`/authors/${featuredAuthor.slug}`} class="hover:text-foreground">{featuredAuthor.name}</a>
+                <span>&middot;</span>
+              </>
+            )}
             <span>{featured.readingTime} min read</span>
           </div>
           <a href={`/blog/${featured.slug}`} class="mt-6 inline-flex items-center gap-1 text-sm font-medium text-primary hover:underline">
-            Read the essay <Icon name="arrow-right" class="h-3.5 w-3.5" />
+            Read the post
+            <Icon name="arrow-right" class="h-3.5 w-3.5" />
           </a>
         </div>
       </article>
@@ -151,7 +132,7 @@ const latest = (await sortedPosts()).filter((post) => post.slug !== featured.slu
 
   <section class="mx-auto max-w-6xl px-5 py-16" data-home-latest>
     <div class="flex flex-wrap items-center justify-between gap-4">
-      <h2 class="font-serif text-2xl font-semibold">Latest</h2>
+      <h2 class="font-serif text-2xl font-semibold">Latest posts</h2>
       <div class="flex flex-wrap gap-2">
         <button
           type="button"
@@ -160,22 +141,20 @@ const latest = (await sortedPosts()).filter((post) => post.slug !== featured.slu
         >
           All
         </button>
-        {
-          categories.map((category) => (
-            <button
-              type="button"
-              data-home-filter={category.slug}
-              class="rounded-full border px-3 py-1 text-xs transition-colors border-border text-muted-foreground hover:text-foreground"
-            >
-              {category.name}
-            </button>
-          ))
-        }
+        {categories.map((category) => (
+          <button
+            type="button"
+            data-home-filter={category.slug}
+            class="rounded-full border px-3 py-1 text-xs transition-colors border-border text-muted-foreground hover:text-foreground"
+          >
+            {category.name}
+          </button>
+        ))}
       </div>
     </div>
 
     <div data-home-empty class="mt-12 rounded-md border border-dashed border-border py-16 text-center text-muted-foreground" hidden>
-      Nothing here yet in this section.
+      Nothing here yet in this category.
     </div>
 
     <div class="mt-10 grid gap-10 sm:grid-cols-2 lg:grid-cols-3">
@@ -184,44 +163,92 @@ const latest = (await sortedPosts()).filter((post) => post.slug !== featured.slu
 
     <div class="mt-12 text-center">
       <a href="/blog" class="inline-flex items-center gap-2 rounded-md border border-border px-5 py-2.5 text-sm font-medium hover:bg-muted">
-        Browse the archive <Icon name="arrow-right" class="h-3.5 w-3.5" />
+        Browse all posts
+        <Icon name="arrow-right" class="h-3.5 w-3.5" />
       </a>
     </div>
   </section>
 
+  <section class="border-t border-border/60">
+    <div class="mx-auto max-w-6xl px-5 py-16">
+      <div class="grid gap-10 lg:grid-cols-3">
+        <div>
+          <div class="text-xs font-medium uppercase tracking-[0.2em] text-primary">Work</div>
+          <h2 class="mt-2 font-serif text-2xl font-semibold">Real results, real numbers.</h2>
+          <p class="mt-3 text-muted-foreground text-sm leading-relaxed">
+            4 case studies across B2B manufacturing, Shopify ecommerce, UK eyewear, and travel affiliate — all with verified GSC data.
+          </p>
+          <div class="mt-6">
+            <a href="/projects" class="inline-flex items-center gap-1 text-sm font-medium text-primary hover:underline">
+              See the work
+              <Icon name="arrow-right" class="h-3.5 w-3.5" />
+            </a>
+          </div>
+        </div>
+        <div>
+          <div class="text-xs font-medium uppercase tracking-[0.2em] text-primary">Services</div>
+          <h2 class="mt-2 font-serif text-2xl font-semibold">SEO, AEO & AI marketing.</h2>
+          <p class="mt-3 text-muted-foreground text-sm leading-relaxed">
+            I work with a small number of clients at a time — so every engagement gets real attention, not a templated approach.
+          </p>
+          <div class="mt-6">
+            <a href="/services" class="inline-flex items-center gap-1 text-sm font-medium text-primary hover:underline">
+              How I can help
+              <Icon name="arrow-right" class="h-3.5 w-3.5" />
+            </a>
+          </div>
+        </div>
+        <div>
+          <div class="text-xs font-medium uppercase tracking-[0.2em] text-primary">Contact</div>
+          <h2 class="mt-2 font-serif text-2xl font-semibold">Let's work together.</h2>
+          <p class="mt-3 text-muted-foreground text-sm leading-relaxed">
+            Whether you need help with SEO, AEO, or just want to talk marketing and AI — my inbox is open.
+          </p>
+          <div class="mt-6">
+            <a href="mailto:howdypiyush@gmail.com" class="inline-flex items-center gap-1 text-sm font-medium text-primary hover:underline">
+              Get in touch
+              <Icon name="arrow-right" class="h-3.5 w-3.5" />
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <Newsletter />
+
 </BaseLayout>
 
 <script>
   const latest = document.querySelector("[data-home-latest]");
   if (latest) {
-    const buttons = [...latest.querySelectorAll("[data-home-filter]")];
-    const cards = [...latest.querySelectorAll("[data-post-card]")];
+    const buttons = Array.from(latest.querySelectorAll("[data-home-filter]"));
+    const cards = Array.from(latest.querySelectorAll("[data-post-card]"));
     const empty = latest.querySelector("[data-home-empty]");
     const activeClasses = ["border-foreground", "bg-foreground", "text-background"];
     const inactiveClasses = ["border-border", "text-muted-foreground", "hover:text-foreground"];
 
-    const setActive = (button, active) => {
+    function setActive(button, active) {
       button.classList.toggle(activeClasses[0], active);
       button.classList.toggle(activeClasses[1], active);
       button.classList.toggle(activeClasses[2], active);
-      inactiveClasses.forEach((className) => button.classList.toggle(className, !active));
-    };
+      inactiveClasses.forEach(function(cls) { button.classList.toggle(cls, !active); });
+    }
 
-    const filterCards = (category) => {
+    function filterCards(category) {
       let visible = 0;
-      cards.forEach((card) => {
+      cards.forEach(function(card) {
         const match = !category || card.dataset.category === category;
         const show = match && visible < 6;
         card.hidden = !show;
         if (match) visible += 1;
       });
       if (empty) empty.hidden = visible > 0;
-      buttons.forEach((button) => setActive(button, button.dataset.homeFilter === category));
-    };
+      buttons.forEach(function(button) { setActive(button, button.dataset.homeFilter === category); });
+    }
 
-    buttons.forEach((button) => {
-      button.addEventListener("click", () => filterCards(button.dataset.homeFilter || ""));
+    buttons.forEach(function(button) {
+      button.addEventListener("click", function() { filterCards(button.dataset.homeFilter || ""); });
     });
   }
 </script>

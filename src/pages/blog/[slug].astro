@@ -80,7 +80,7 @@ const jsonLd = {
     <Breadcrumbs
       items={[
         { label: "Home", to: "/" },
-        { label: "Archive", to: "/blog" },
+        { label: "Blog", to: "/blog" },
         ...(category ? [{ label: category.name, to: `/categories/${category.slug}` }] : []),
         { label: post.title },
       ]}
@@ -102,7 +102,7 @@ const jsonLd = {
         {
           author && (
             <a href={`/authors/${author.slug}`} class="flex items-center gap-2 hover:text-foreground">
-              <img src={author.avatar} alt="" width="28" height="28" class="h-7 w-7 rounded-full" />
+              <img src={author.avatar} alt="" width="28" height="28" class="h-7 w-7 rounded-full object-cover" />
               {author.name}
             </a>
           )
@@ -135,8 +135,8 @@ const jsonLd = {
                 {post.imageCredit.caption && <span>{post.imageCredit.caption} </span>}
                 <span>
                   Photo by{" "}
-                  <a
-                    href={post.imageCredit.authorUrl}
+                  
+                    <a href={post.imageCredit.authorUrl}
                     target="_blank"
                     rel="noreferrer"
                     class="text-foreground/75 underline underline-offset-2 hover:text-primary"
@@ -144,8 +144,8 @@ const jsonLd = {
                     {post.imageCredit.author}
                   </a>{" "}
                   on{" "}
-                  <a
-                    href={post.imageCredit.sourceUrl}
+                  
+                    <a href={post.imageCredit.sourceUrl}
                     target="_blank"
                     rel="noreferrer"
                     class="text-foreground/75 underline underline-offset-2 hover:text-primary"
@@ -181,10 +181,23 @@ const jsonLd = {
           }
         </div>
 
-        <div class="mt-8 flex items-center gap-2 border-y border-border py-4">
+        <div class="mt-8 flex flex-wrap items-center gap-2 border-y border-border py-4">
           <span class="text-xs uppercase tracking-wider text-muted-foreground">Share</span>
-          <a target="_blank" rel="noreferrer" aria-label="Share on Twitter" data-share-twitter data-share-title={post.title} href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(post.title)}&url=${encodeURIComponent(shareUrl)}`} class="inline-flex h-8 w-8 items-center justify-center rounded-full border border-border text-muted-foreground hover:text-primary"><Icon name="twitter" class="h-3.5 w-3.5" /></a>
-          <a target="_blank" rel="noreferrer" aria-label="Share on LinkedIn" data-share-linkedin href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(shareUrl)}`} class="inline-flex h-8 w-8 items-center justify-center rounded-full border border-border text-muted-foreground hover:text-primary"><Icon name="linkedin" class="h-3.5 w-3.5" /></a>
+          <a target="_blank" rel="noreferrer" aria-label="Share on Twitter / X" data-share-twitter data-share-title={post.title} href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(post.title)}&url=${encodeURIComponent(shareUrl)}`} class="inline-flex h-8 w-8 items-center justify-center rounded-full border border-border text-muted-foreground hover:text-primary">
+            <Icon name="twitter" class="h-3.5 w-3.5" />
+          </a>
+          <a target="_blank" rel="noreferrer" aria-label="Share on LinkedIn" data-share-linkedin href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(shareUrl)}`} class="inline-flex h-8 w-8 items-center justify-center rounded-full border border-border text-muted-foreground hover:text-primary">
+            <Icon name="linkedin" class="h-3.5 w-3.5" />
+          </a>
+          <a target="_blank" rel="noreferrer" aria-label="Share on Facebook" data-share-facebook href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareUrl)}`} class="inline-flex h-8 w-8 items-center justify-center rounded-full border border-border text-muted-foreground hover:text-primary">
+            <Icon name="facebook" class="h-3.5 w-3.5" />
+          </a>
+          <a target="_blank" rel="noreferrer" aria-label="Share on WhatsApp" data-share-whatsapp href={`https://wa.me/?text=${encodeURIComponent(post.title + ' ' + shareUrl)}`} class="inline-flex h-8 w-8 items-center justify-center rounded-full border border-border text-muted-foreground hover:text-primary">
+            <Icon name="whatsapp" class="h-3.5 w-3.5" />
+          </a>
+          <a target="_blank" rel="noreferrer" aria-label="Share via Email" href={`mailto:?subject=${encodeURIComponent(post.title)}&body=${encodeURIComponent('I thought you might find this interesting: ' + shareUrl)}`} class="inline-flex h-8 w-8 items-center justify-center rounded-full border border-border text-muted-foreground hover:text-primary">
+            <Icon name="mail" class="h-3.5 w-3.5" />
+          </a>
           <button type="button" data-copy-link class="ml-auto inline-flex items-center gap-2 rounded-full border border-border px-3 py-1.5 text-xs text-muted-foreground hover:text-foreground">
             <span data-copy-ready class="inline-flex items-center gap-2"><Icon name="copy" class="h-3.5 w-3.5" /> Copy link</span>
             <span data-copy-done class="inline-flex items-center gap-2" hidden><Icon name="check" class="h-3.5 w-3.5" /> Copied</span>
@@ -194,7 +207,7 @@ const jsonLd = {
         {
           author && (
             <div class="mt-10 flex items-start gap-4 rounded-md border border-border p-5">
-              <img src={author.avatar} alt="" width="56" height="56" class="h-14 w-14 rounded-full" />
+              <img src={author.avatar} alt="" width="56" height="56" class="h-14 w-14 rounded-full object-cover" />
               <div>
                 <div class="text-xs uppercase tracking-wider text-muted-foreground">Written by</div>
                 <a href={`/authors/${author.slug}`} class="font-serif text-lg font-semibold hover:text-primary">
@@ -210,7 +223,9 @@ const jsonLd = {
           {
             prev ? (
               <a href={`/blog/${prev.slug}`} class="group block">
-                <div class="flex items-center gap-1 text-xs text-muted-foreground"><Icon name="arrow-left" class="h-3 w-3" /> Previous</div>
+                <div class="flex items-center gap-1 text-xs text-muted-foreground">
+                  <Icon name="arrow-left" class="h-3 w-3" /> Previous
+                </div>
                 <div class="mt-1 font-serif text-base font-semibold leading-snug group-hover:text-primary">{prev.title}</div>
               </a>
             ) : (
@@ -220,7 +235,9 @@ const jsonLd = {
           {
             next ? (
               <a href={`/blog/${next.slug}`} class="group block sm:text-right">
-                <div class="flex items-center gap-1 text-xs text-muted-foreground sm:justify-end">Next <Icon name="arrow-right" class="h-3 w-3" /></div>
+                <div class="flex items-center gap-1 text-xs text-muted-foreground sm:justify-end">
+                  Next <Icon name="arrow-right" class="h-3 w-3" />
+                </div>
                 <div class="mt-1 font-serif text-base font-semibold leading-snug group-hover:text-primary">{next.title}</div>
               </a>
             ) : (
@@ -228,12 +245,6 @@ const jsonLd = {
             )
           }
         </nav>
-
-        <div class="mt-12 rounded-md border border-dashed border-border p-8 text-center">
-          <Icon name="message" class="mx-auto h-5 w-5 text-muted-foreground" />
-          <div class="mt-2 font-serif text-lg">Comments</div>
-          <p class="mt-1 text-sm text-muted-foreground">Hook this up to your favourite commenting platform &mdash; Giscus, Disqus, or your own.</p>
-        </div>
       </div>
 
       <aside class="hidden lg:block">
@@ -273,6 +284,8 @@ const jsonLd = {
   const checkIcon = '<svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg>';
   const twitterShare = document.querySelector("[data-share-twitter]");
   const linkedinShare = document.querySelector("[data-share-linkedin]");
+  const facebookShare = document.querySelector("[data-share-facebook]");
+  const whatsappShare = document.querySelector("[data-share-whatsapp]");
   const currentUrl = window.location.href;
 
   if (twitterShare) {
@@ -288,12 +301,21 @@ const jsonLd = {
     `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(currentUrl)}`,
   );
 
+  facebookShare?.setAttribute(
+    "href",
+    `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(currentUrl)}`,
+  );
+
+  whatsappShare?.setAttribute(
+    "href",
+    `https://wa.me/?text=${encodeURIComponent(document.title + ' ' + currentUrl)}`,
+  );
+
   const writeClipboard = async (text) => {
     if (navigator.clipboard?.writeText) {
       await navigator.clipboard.writeText(text);
       return;
     }
-
     const textarea = document.createElement("textarea");
     textarea.value = text;
     textarea.setAttribute("readonly", "");
