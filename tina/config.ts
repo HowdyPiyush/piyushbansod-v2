@@ -1,10 +1,7 @@
 import { defineConfig } from "tinacms";
 
 const branch =
-  process.env.GITHUB_BRANCH ||
-  process.env.VERCEL_GIT_COMMIT_REF ||
-  process.env.HEAD ||
-  "main";
+  process.env.GITHUB_BRANCH || process.env.VERCEL_GIT_COMMIT_REF || process.env.HEAD || "main";
 
 export default defineConfig({
   branch,
@@ -109,9 +106,7 @@ export default defineConfig({
             name: "author",
             label: "Author",
             required: true,
-            options: [
-              { value: "piyush-bansod", label: "Piyush Bansod" },
-            ],
+            options: [{ value: "piyush-bansod", label: "Piyush Bansod" }],
           },
           {
             type: "image",

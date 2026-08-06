@@ -17,6 +17,7 @@
     "@astrojs/vercel": "^11.0.4",
     "@tailwindcss/vite": "^4.3.1",
     "@tinacms/astro": "^0.6.1",
+    "@vercel/analytics": "^2.0.1",
     "astro": "^7.0.4",
     "tailwindcss": "^4.3.1",
     "tinacms": "^3.11.0"
