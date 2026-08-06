@@ -22,3 +22,6 @@ dist
 *.njsproj
 *.sln
 *.sw?
+
+.env
+tina/__generated__
