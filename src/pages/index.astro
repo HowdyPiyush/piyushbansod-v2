@@ -76,16 +76,27 @@ const latest = (await sortedPosts()).filter((post) => post.slug !== featured.slu
         <a href={`/blog/${featured.slug}`} class="group block" aria-label={`Read ${featured.title}`}>
           <div class="aspect-[4/3] overflow-hidden rounded-md bg-muted">
             {featured.thumbnail && (
-              <Image
-                src={featured.thumbnail}
-                alt=""
-                class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.02]"
-                width={720}
-                widths={[372, 560, 720]}
-                sizes="(min-width: 1024px) 560px, calc(100vw - 40px)"
-                format="webp"
-                quality={64}
-              />
+              {typeof featured.thumbnail === "string" ? (
+  <img
+    src={featured.thumbnail}
+    alt=""
+    width="720"
+    height="540"
+    class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.02]"
+    loading="eager"
+  />
+) : (
+  <Image
+    src={featured.thumbnail}
+    alt=""
+    class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.02]"
+    width={720}
+    widths={[372, 560, 720]}
+    sizes="(min-width: 1024px) 560px, calc(100vw - 40px)"
+    format="webp"
+    quality={64}
+  />
+)}
             )}
           </div>
         </a>
