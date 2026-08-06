@@ -117,19 +117,30 @@ const jsonLd = {
     </header>
 
     {
-      post.thumbnail && (
-        <figure class="mx-auto mt-10 max-w-4xl">
-          <div class="overflow-hidden rounded-md bg-muted">
-            <Image
-              src={post.thumbnail}
-              alt={post.thumbnailAlt || post.imageCredit?.caption || ""}
-              class="w-full"
-              widths={[640, 960, 1280, 1600]}
-              sizes="(min-width: 1024px) 896px, calc(100vw - 40px)"
-              format="webp"
-              quality={78}
-            />
-          </div>
+  post.thumbnail && (
+    <figure class="mx-auto mt-10 max-w-4xl">
+      <div class="overflow-hidden rounded-md bg-muted">
+        {typeof post.thumbnail === "string" ? (
+          <img
+            src={post.thumbnail}
+            alt={post.thumbnailAlt || post.imageCredit?.caption || ""}
+            class="w-full"
+            width="1200"
+            height="630"
+            loading="eager"
+          />
+        ) : (
+          <Image
+            src={post.thumbnail}
+            alt={post.thumbnailAlt || post.imageCredit?.caption || ""}
+            class="w-full"
+            widths={[640, 960, 1280, 1600]}
+            sizes="(min-width: 1024px) 896px, calc(100vw - 40px)"
+            format="webp"
+            quality={78}
+          />
+        )}
+      </div>
           {
             post.imageCredit && (
               <figcaption class="mx-auto mt-3 max-w-2xl text-center text-xs leading-relaxed text-muted-foreground">
