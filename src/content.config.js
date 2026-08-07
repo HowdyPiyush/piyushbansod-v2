@@ -4,11 +4,11 @@ import { z } from "astro/zod";
 
 const blog = defineCollection({
   loader: glob({
-    pattern: "**/index.mdx",
+    pattern: "*.mdx",
     base: "./src/content/blog",
-    generateId: ({ entry }) => entry.replace(/[\\/]index\.mdx$/, "").replace(/\\/g, "/"),
+    generateId: ({ entry }) => entry.replace(/\.mdx$/, ""),
   }),
-  schema: ({ image }) =>
+  schema: () =>
     z.object({
       title: z.string(),
       excerpt: z.string(),
@@ -21,7 +21,7 @@ const blog = defineCollection({
       category: z.string(),
       tags: z.array(z.string()).default([]),
       author: z.string(),
-      thumbnail: z.string(),
+      thumbnail: z.string().optional(),
       thumbnailAlt: z.string().default(""),
       imageCredit: z
         .object({

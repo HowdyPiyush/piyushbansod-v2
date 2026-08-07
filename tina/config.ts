@@ -30,9 +30,6 @@ export default defineConfig({
         label: "Blog Posts",
         path: "src/content/blog",
         format: "mdx",
-        match: {
-          include: "**/index",
-        },
         ui: {
           filename: {
             slugify: (values) => {
@@ -45,8 +42,7 @@ export default defineConfig({
             },
           },
           router: ({ document }) => {
-            const slug = document._sys.breadcrumbs[0];
-            return `/blog/${slug}`;
+            return `/blog/${document._sys.filename}`;
           },
         },
         fields: [
@@ -60,11 +56,9 @@ export default defineConfig({
           {
             type: "string",
             name: "excerpt",
-            label: "Excerpt (short description shown in blog list)",
+            label: "Excerpt",
             required: true,
-            ui: {
-              component: "textarea",
-            },
+            ui: { component: "textarea" },
           },
           {
             type: "datetime",
@@ -117,7 +111,6 @@ export default defineConfig({
             type: "image",
             name: "thumbnail",
             label: "Cover Image",
-            required: true,
           },
           {
             type: "string",
@@ -127,25 +120,23 @@ export default defineConfig({
           {
             type: "boolean",
             name: "featured",
-            label: "Featured post (shows on homepage)",
+            label: "Featured post",
           },
           {
             type: "boolean",
             name: "draft",
-            label: "Draft (hidden from public)",
+            label: "Draft",
           },
           {
             type: "string",
             name: "seoTitle",
-            label: "SEO Title (optional — overrides page title for Google)",
+            label: "SEO Title (optional)",
           },
           {
             type: "string",
             name: "seoDescription",
-            label: "SEO Description (optional — overrides excerpt for Google)",
-            ui: {
-              component: "textarea",
-            },
+            label: "SEO Description (optional)",
+            ui: { component: "textarea" },
           },
           {
             type: "rich-text",
