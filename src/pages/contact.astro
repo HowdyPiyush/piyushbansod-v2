@@ -3,7 +3,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import Breadcrumbs from "../components/Breadcrumbs.astro";
 import Icon from "../components/Icon.astro";
 import { SITE } from "../lib/blog-data.js";
-import { CONTACT, FORMS } from "../config/theme.config.ts";
+import { FORMS } from "../config/theme.config.ts";
 
 const hasContactEndpoint = Boolean(FORMS.contact.action);
 const contactAction = hasContactEndpoint ? FORMS.contact.action : "/contact";
@@ -39,7 +39,7 @@ const RECAPTCHA_SITE_KEY = import.meta.env.PUBLIC_RECAPTCHA_SITE_KEY;
     )}
     {hasError === "true" && (
       <div class="mt-8 rounded-md border border-red-500/30 bg-red-500/10 px-4 py-3 text-sm text-red-700 dark:text-red-400">
-        Something went wrong sending your message. Please try again or email me directly through the form below.
+        Something went wrong sending your message. Please try again or reach out via LinkedIn or Twitter/X below.
       </div>
     )}
 
@@ -105,8 +105,8 @@ const RECAPTCHA_SITE_KEY = import.meta.env.PUBLIC_RECAPTCHA_SITE_KEY;
               </a>
             </li>
             <li>
-              <a href={CONTACT.socialUrl} target="_blank" rel="noreferrer" class="flex items-center gap-2 hover:text-primary">
-                <Icon name="twitter" class="h-3.5 w-3.5" /> {CONTACT.socialHandle}
+              <a href="https://x.com/howdypiyush_" target="_blank" rel="noreferrer" class="flex items-center gap-2 hover:text-primary">
+                <Icon name="twitter" class="h-3.5 w-3.5" /> @howdypiyush_
               </a>
             </li>
           </ul>
@@ -139,18 +139,16 @@ const RECAPTCHA_SITE_KEY = import.meta.env.PUBLIC_RECAPTCHA_SITE_KEY;
     });
   </script>
 
-  <script define:vars={{ user: "howdypiyush", domain: "gmail.com" }}>
+  <script>
     const emailLink = document.getElementById("emailLink");
     const emailText = document.getElementById("emailText");
-    const address = user + "@" + domain;
 
-    emailLink.addEventListener("click", function (e) {
+    emailLink.addEventListener("click", async function (e) {
       e.preventDefault();
-      window.location.href = "mailto:" + address;
+      const res = await fetch("/api/email");
+      const data = await res.json();
+      emailText.textContent = data.email;
+      window.location.href = "mailto:" + data.email;
     });
-
-    emailLink.addEventListener("mouseenter", function () {
-      emailText.textContent = address;
-    }, { once: true });
   </script>
 </BaseLayout>
