@@ -31,7 +31,7 @@ export const CONTACT = {
 
 export const FORMS = {
   contact: {
-    action: "",
+    action: "/api/contact",
     method: "post",
     enctype: "application/x-www-form-urlencoded",
   },
