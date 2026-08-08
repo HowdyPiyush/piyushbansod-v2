@@ -26,7 +26,6 @@ const absoluteUrl = (value) => {
   }
 };
 const canonicalUrl = absoluteUrl(canonical || Astro.url.pathname);
-// Fall back to a site-wide default OG image when a page doesn't provide its own
 const ogImageUrl = absoluteUrl(ogImage) || absoluteUrl("/og-default.webp");
 ---
 
