@@ -140,13 +140,28 @@ const RECAPTCHA_SITE_KEY = import.meta.env.PUBLIC_RECAPTCHA_SITE_KEY;
   </script>
 
   <script>
-    const emailLink = document.getElementById("emailLink");
+    document.addEventListener("DOMContentLoaded", function () {
+      const emailLink = document.getElementById("emailLink");
 
-    emailLink.addEventListener("click", async function (e) {
-      e.preventDefault();
-      const res = await fetch("/api/email");
-      const data = await res.json();
-      window.location.href = "mailto:" + data.email;
+      if (!emailLink) {
+        console.error("emailLink element not found on page");
+        return;
+      }
+
+      emailLink.addEventListener("click", async function (e) {
+        e.preventDefault();
+        try {
+          const res = await fetch("/api/email");
+          if (!res.ok) {
+            console.error("Failed to fetch email, status:", res.status);
+            return;
+          }
+          const data = await res.json();
+          window.location.href = "mailto:" + data.email;
+        } catch (err) {
+          console.error("Error fetching email:", err);
+        }
+      });
     });
   </script>
 </BaseLayout>
