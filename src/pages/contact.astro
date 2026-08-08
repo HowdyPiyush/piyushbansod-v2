@@ -9,6 +9,11 @@ const hasContactEndpoint = Boolean(FORMS.contact.action);
 const contactAction = hasContactEndpoint ? FORMS.contact.action : "/contact";
 const contactMethod = hasContactEndpoint ? FORMS.contact.method : "get";
 const contactEnctype = hasContactEndpoint ? FORMS.contact.enctype : undefined;
+
+const sent = Astro.url.searchParams.get("sent");
+const hasError = Astro.url.searchParams.get("error");
+
+const RECAPTCHA_SITE_KEY = import.meta.env.PUBLIC_RECAPTCHA_SITE_KEY;
 ---
 
 <BaseLayout
@@ -27,8 +32,20 @@ const contactEnctype = hasContactEndpoint ? FORMS.contact.enctype : undefined;
       </p>
     </header>
 
+    {sent === "true" && (
+      <div class="mt-8 rounded-md border border-green-500/30 bg-green-500/10 px-4 py-3 text-sm text-green-700 dark:text-green-400">
+        Thanks for reaching out! Your message has been sent — I'll get back to you within 24–48 hours.
+      </div>
+    )}
+    {hasError === "true" && (
+      <div class="mt-8 rounded-md border border-red-500/30 bg-red-500/10 px-4 py-3 text-sm text-red-700 dark:text-red-400">
+        Something went wrong sending your message. Please try again or email me directly at {CONTACT.email}.
+      </div>
+    )}
+
     <div class="mt-12 grid gap-12 lg:grid-cols-[1fr_240px]">
       <form
+        id="contactForm"
         action={contactAction}
         method={contactMethod}
         enctype={contactEnctype}
@@ -50,6 +67,13 @@ const contactEnctype = hasContactEndpoint ? FORMS.contact.enctype : undefined;
           <label for="message" class="text-xs font-medium uppercase tracking-wider text-muted-foreground">Message</label>
           <textarea id="message" name="message" required rows="6" class="mt-2 w-full border-0 border-b border-input bg-transparent py-2 text-base outline-none focus:border-primary"></textarea>
         </div>
+
+        <!-- Honeypot: hidden from real users, bots often fill it in -->
+        <input type="text" name="website" style="position:absolute; left:-9999px" tabindex="-1" autocomplete="off" />
+
+        <!-- reCAPTCHA v3 token, filled in by JS right before submit -->
+        <input type="hidden" id="recaptchaToken" name="recaptchaToken" />
+
         <button type="submit" class="rounded-md bg-foreground px-6 py-2.5 text-sm font-medium text-background hover:opacity-90">
           Send message
         </button>
@@ -92,4 +116,20 @@ const contactEnctype = hasContactEndpoint ? FORMS.contact.enctype : undefined;
       </aside>
     </div>
   </div>
+
+  <script src={`https://www.google.com/recaptcha/api.js?render=${RECAPTCHA_SITE_KEY}`} is:inline></script>
+  <script define:vars={{ siteKey: RECAPTCHA_SITE_KEY }}>
+    const form = document.getElementById("contactForm");
+    const tokenInput = document.getElementById("recaptchaToken");
+
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+      grecaptcha.ready(function () {
+        grecaptcha.execute(siteKey, { action: "contact" }).then(function (token) {
+          tokenInput.value = token;
+          form.submit();
+        });
+      });
+    });
+  </script>
 </BaseLayout>

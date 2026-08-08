@@ -2,7 +2,7 @@ import type { APIRoute } from "astro";
 
 export const prerender = false;
 
-export const POST: APIRoute = async ({ request }) => {
+export const POST: APIRoute = async ({ request, redirect }) => {
   try {
     const formData = await request.formData();
     const name = formData.get("name")?.toString() || "";
@@ -10,17 +10,49 @@ export const POST: APIRoute = async ({ request }) => {
     const subject = formData.get("subject")?.toString() || "New contact form message";
     const message = formData.get("message")?.toString() || "";
     const honeypot = formData.get("website")?.toString();
+    const recaptchaToken = formData.get("recaptchaToken")?.toString();
 
-    // Silently drop bot submissions
+    const wantsJson = request.headers.get("accept")?.includes("application/json");
+
+    // Silently accept-but-drop bot submissions caught by the honeypot
     if (honeypot) {
-      return new Response(null, { status: 200 });
+      return wantsJson
+        ? new Response(JSON.stringify({ success: true }), { status: 200 })
+        : redirect("/contact?sent=true");
     }
 
     if (!name || !email || !message) {
-      return new Response(JSON.stringify({ error: "Missing required fields" }), { status: 400 });
+      return wantsJson
+        ? new Response(JSON.stringify({ error: "Missing required fields" }), { status: 400 })
+        : redirect("/contact?error=true");
     }
 
-    const response = await fetch("https://api.resend.com/emails", {
+    // Verify reCAPTCHA v3 token server-side
+    if (!recaptchaToken) {
+      return wantsJson
+        ? new Response(JSON.stringify({ error: "Missing recaptcha token" }), { status: 400 })
+        : redirect("/contact?error=true");
+    }
+
+    const verifyRes = await fetch("https://www.google.com/recaptcha/api/siteverify", {
+      method: "POST",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: new URLSearchParams({
+        secret: import.meta.env.RECAPTCHA_SECRET_KEY,
+        response: recaptchaToken,
+      }),
+    });
+    const verifyData = await verifyRes.json();
+
+    // v3 returns a score 0.0 (likely bot) to 1.0 (likely human); 0.5 is Google's suggested cutoff
+    if (!verifyData.success || verifyData.score < 0.5) {
+      console.warn("reCAPTCHA failed:", verifyData);
+      return wantsJson
+        ? new Response(JSON.stringify({ error: "Failed spam check" }), { status: 400 })
+        : redirect("/contact?error=true");
+    }
+
+    const emailRes = await fetch("https://api.resend.com/emails", {
       method: "POST",
       headers: {
         Authorization: `Bearer ${import.meta.env.RESEND_API_KEY}`,
@@ -36,14 +68,16 @@ export const POST: APIRoute = async ({ request }) => {
       }),
     });
 
-    if (!response.ok) {
-      console.error("Resend error:", await response.text());
-      return new Response(JSON.stringify({ error: "Failed to send" }), { status: 502 });
+    if (!emailRes.ok) {
+      console.error("Resend error:", await emailRes.text());
+      return wantsJson
+        ? new Response(JSON.stringify({ error: "Failed to send" }), { status: 502 })
+        : redirect("/contact?error=true");
     }
 
-    return request.headers.get("accept")?.includes("application/json")
+    return wantsJson
       ? new Response(JSON.stringify({ success: true }), { status: 200 })
-      : new Response(null, { status: 302, headers: { Location: "/contact?sent=true" } });
+      : redirect("/contact?sent=true");
   } catch (err) {
     console.error("Contact form error:", err);
     return new Response(JSON.stringify({ error: "Something went wrong" }), { status: 500 });
