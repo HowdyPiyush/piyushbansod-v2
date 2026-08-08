@@ -59,8 +59,14 @@ const jsonLd = {
   datePublished: post.date,
   dateModified: post.updated || post.date,
   image: thumbnailUrl,
-  author: { "@type": "Person", name: author?.name },
-  mainEntityOfPage: canonicalUrl,
+  author: { "@type": "Person", name: author?.name, url: `${SITE.url}/authors/${author?.slug}` },
+  publisher: {
+    "@type": "Organization",
+    name: SITE.name,
+    logo: { "@type": "ImageObject", url: `${SITE.url}/profile.webp` },
+  },
+  mainEntityOfPage: { "@type": "WebPage", "@id": canonicalUrl },
+  ...(category ? { articleSection: category.name } : {}),
 };
 ---
 

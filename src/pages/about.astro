@@ -2,12 +2,42 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Breadcrumbs from "../components/Breadcrumbs.astro";
 import { SITE, authors } from "../lib/blog-data.js";
+
+const personJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: "Piyush Bansod",
+  url: SITE.url,
+  image: `${SITE.url}/profile.webp`,
+  jobTitle: "Full-stack Digital Marketer & AI Generalist",
+  description:
+    "Full-stack digital marketer and AI generalist with 6+ years of experience in SEO, AEO, and AI-powered marketing.",
+  worksFor: {
+    "@type": "Organization",
+    name: "Clysentra",
+  },
+  knowsAbout: [
+    "SEO",
+    "Answer Engine Optimization",
+    "AI Marketing",
+    "Technical SEO",
+    "Content Strategy",
+  ],
+  sameAs: [
+    "https://www.linkedin.com/in/howdypiyush/",
+    "https://instagram.com/howdypiyush/",
+    "https://x.com/howdypiyush_",
+    "https://www.facebook.com/piyush.bansod.9406",
+    "https://github.com/HowdyPiyush",
+  ],
+};
 ---
 
 <BaseLayout
   title={`About - ${SITE.name}`}
   description="Full-stack digital marketer & AI generalist with 6+ years of experience in SEO, AEO, and AI-powered marketing."
   canonical="/about"
+  jsonLd={personJsonLd}
 >
   <div class="mx-auto max-w-3xl px-5 py-12">
     <Breadcrumbs items={[{ label: "Home", to: "/" }, { label: "About" }]} />

@@ -26,7 +26,8 @@ const absoluteUrl = (value) => {
   }
 };
 const canonicalUrl = absoluteUrl(canonical || Astro.url.pathname);
-const ogImageUrl = absoluteUrl(ogImage);
+// Fall back to a site-wide default OG image when a page doesn't provide its own
+const ogImageUrl = absoluteUrl(ogImage) || absoluteUrl("/og-default.webp");
 ---
 
 <!doctype html>
@@ -34,6 +35,22 @@ const ogImageUrl = absoluteUrl(ogImage);
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- Google Tag Manager -->
+    <script is:inline>
+      (function (w, d, s, l, i) {
+        w[l] = w[l] || [];
+        w[l].push({ "gtm.start": new Date().getTime(), event: "gtm.js" });
+        var f = d.getElementsByTagName(s)[0],
+          j = d.createElement(s),
+          dl = l != "dataLayer" ? "&l=" + l : "";
+        j.async = true;
+        j.src = "https://www.googletagmanager.com/gtm.js?id=" + i + dl;
+        f.parentNode.insertBefore(j, f);
+      })(window, document, "script", "dataLayer", "GTM-K82XC9L8");
+    </script>
+    <!-- End Google Tag Manager -->
+
     <title>{title}</title>
     <meta name="description" content={description} />
     <meta name="author" content={SITE.name} />
@@ -85,6 +102,17 @@ const ogImageUrl = absoluteUrl(ogImage);
     </script>
   </head>
   <body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript>
+      <iframe
+        src="https://www.googletagmanager.com/ns.html?id=GTM-K82XC9L8"
+        height="0"
+        width="0"
+        style="display:none;visibility:hidden"
+      ></iframe>
+    </noscript>
+    <!-- End Google Tag Manager (noscript) -->
+
     <a href="#main-content" class="skip-link">Skip to content</a>
     <div class="flex min-h-dvh flex-col">
       <Header />
